@@ -18,7 +18,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Index [token required]
 - Show [token required]
-- Create N[token required]
+- Create N[token]
 
 #### Orders
 
@@ -58,6 +58,36 @@ These are the notes from a meeting with the frontend developer that describe wha
 ### Endpoints Strucher ---> User
 
 -index - token required
+.HTTP web
+.Endpoint:/user/CreateUser
+.REQUEST BODY--> Array of User Object
+{
+"\_id": 1,
+"\_name": "ahmed3800",
+"\_first_name": "ahmed",
+"\_last_name": "rafat",
+"\_gmail": "rafatahmed380@gmail.com",
+"\_password": "$2b$10$9VhK7djs1VXEoIXv.ob0COmRmq5h8g6mjUZ3aV2Rt9Kd4yzOjwiwe"
+}
+-index - token not required
+.HTTP web post
+.Endpoint:/user/authanticated
+.REQUEST BODY--> Array of User Object
+{
+User:  
+{
+\_id: 1
+\_name: 'newahmed'
+\_first_name: 'ahmed'
+\_last_name: 'rafaat'
+\_gmail: 'rafatahmed@gmail.com'
+\_password: 'ahmednew'
+}
+,
+token: token
+}
+
+-index - token required
 .HTTP web get
 .Endpoint:/user/GetOne
 .REQUEST BODY--> Array of User Object
@@ -67,12 +97,12 @@ data :
 'User' :
 [
 {
-\_id: 1
-\_name: 'ahmed30'
-\_first_name: 'ahmed'
-\_last_name: 'rafaat'
-\_gmail: 'rafatahmed@gmail.com'
-\_password: '1234'
+_id: 1
+_name: 'ahmed30'
+_first_name: 'ahmed'
+_last_name: 'rafaat'
+_gmail: 'rafatahmed@gmail.com'
+_password: '1234'
 }
 ],
 message: 'Get User',
@@ -105,27 +135,6 @@ data :
 }
 ],
 message: 'Get All Users',
-}
-
--index - token required
-.HTTP web post
-.Endpoint:/user/CreateOne
-.REQUEST BODY--> Array of User Object
-{
-status: 'Success',
-data :
-'User' :
-[
-{
-\_id: 1
-\_name: 'ahmed30'
-\_first_name: 'ahmed'
-\_last_name: 'rafaat'
-\_gmail: 'rafatahmed@gmail.com'
-\_password: '1234'
-}
-],
-message: 'Create User',
 }
 
 -index - token required
@@ -170,24 +179,6 @@ data :
 message: 'Delete User',
 }
 
--index - token not required
-.HTTP web post
-.Endpoint:/user/authanticated
-.REQUEST BODY--> Array of User Object
-{
-User:  
- {
-\_id: 1
-\_name: 'newahmed'
-\_first_name: 'ahmed'
-\_last_name: 'rafaat'
-\_gmail: 'rafatahmed@gmail.com'
-\_password: 'ahmednew'
-}
-,
-token: token
-}
-
 ### Endpoints Strucher ---> Product
 
 -index - token required
@@ -226,7 +217,7 @@ price: 20
 category: 'not'
 },
 {
- id: 2
+id: 2
 _name: 'fool2'
 descount: null
 brand: 'eg'
@@ -328,14 +319,14 @@ data :
 'Order' :
 [ 'Order' :
 {
- id: 1
+id: 1
 user_id: 1
 quantity: 2
 _status: 'conblited'
 },
 'Order' :
 {
- id: 1
+id: 1
 user_id: 1
 quantity: 2
 _status: 'conblited'

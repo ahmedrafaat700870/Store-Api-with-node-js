@@ -30,8 +30,8 @@ describe('Test Endpoints User Routes', () => {
         .post('/user/authanticated')
         .set('Content-type', 'application/json')
         .send({
-          gmail: 'rafatahmed380@gmail.com',
-          password: '123a4',
+          _gmail: 'rafatahmed380@gmail.com',
+          _password: '123a4',
         })
       expect(res.status).toBe(200)
       expect(user._gmail).toBe(res.body.User._gmail)
@@ -43,8 +43,8 @@ describe('Test Endpoints User Routes', () => {
         .post('/user/authanticated')
         .set('Content-type', 'application/json')
         .send({
-          gmail: 'rafatahmed380@gmailasfd.com',
-          password: '123a4asdf',
+          _gmail: 'rafatahmed380@gmailasfd.com',
+          _password: '123a4asdf',
         })
       expect(res.status).toBe(401)
     })
@@ -59,7 +59,7 @@ describe('Test Endpoints User Routes', () => {
         _password: '123a4',
       } as User
       const res = await request
-        .post('/user/CreateOne')
+        .post('/user/CreateUser')
         .set('Content-type', 'application/json')
         .set('Authorization', `${token}`)
         .send(NewUser)

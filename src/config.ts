@@ -11,6 +11,7 @@ const {
   bycript_Password,
   salt_Rounds,
   Tocken_Secret,
+  NODE_ENV,
 } = process.env
 export default {
   PORT,
@@ -23,4 +24,5 @@ export default {
   bycript_Password,
   salt_Rounds,
   Tocken_Secret,
+  NODE_ENV,
 }

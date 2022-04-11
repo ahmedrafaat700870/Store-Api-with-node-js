@@ -144,3 +144,11 @@ salt_Rounds=10
 
 Tocken_Secret=my-tocken-secret
 '''
+
+### Setup Database
+
+simply, run the followning command to install the project dependencies:
+
+'''bash
+npm run up
+'''

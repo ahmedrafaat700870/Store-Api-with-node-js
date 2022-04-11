@@ -21,7 +21,7 @@ export class UserStore {
       con.release()
       return res.rows[0]
     } catch (err) {
-      throw new Error('err')
+      throw new Error(`${err}`)
     }
   }
   async GetAll(): Promise<User[]> {

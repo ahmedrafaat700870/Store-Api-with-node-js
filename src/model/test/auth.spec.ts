@@ -18,6 +18,7 @@ describe('Authantocate Model', () => {
     } as User
     beforeAll(async () => {
       const NewUser = await usermodel.Create(user)
+      // eslint-disable-next-line prettier/prettier
       user._id = NewUser._id
     })
     afterAll(async () => {
