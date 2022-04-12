@@ -24,7 +24,7 @@ describe('Test Endpoints Order Routes', () => {
   beforeAll(async () => {
     const NewUser = await UserModel.Create(user)
     user._id = NewUser._id
-    order.user_id = user._id
+    order.user_id = user._id as number
     const NewOrder = await OrderModel.Create(order)
     order.id = NewOrder.id
   })

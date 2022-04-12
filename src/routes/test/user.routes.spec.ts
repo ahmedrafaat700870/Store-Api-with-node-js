@@ -1,9 +1,18 @@
 import supertest from 'supertest'
 import app from '../..'
-import User from '../../types/user.type'
-import DB from '../../database'
 import UserStore from '../../model/User.model'
+import OrderStore from '../../model/Order.model'
+import Prodcut_Order_Store from '../../model/Product_Order.model'
+import ProductStore from '../../model/Product.model'
+import User from '../../types/user.type'
+import Product from '../../types/Product.type'
+import Order from '../../types/Order.type'
+import Product_Order from '../../types/Prodcut_Order.tyes'
+import DB from '../../database'
 const UserModel = new UserStore()
+const OrderModel = new OrderStore()
+const ProductModel = new ProductStore()
+const Product_Order_Model = new Prodcut_Order_Store()
 const request = supertest(app)
 let token: string
 describe('Test Endpoints User Routes', () => {
@@ -14,14 +23,41 @@ describe('Test Endpoints User Routes', () => {
     _gmail: 'rafatahmed380@gmail.com',
     _password: '123a4',
   } as User
+  const order = {
+    quantity: 2,
+    _status: 'not comblite',
+  } as Order
+  const product = {
+    _name: 'Foll',
+    descount: 20,
+    brand: 'itslate',
+    price: 50,
+    category: 'food',
+  } as Product
+  const Prodcut_Order = {} as Product_Order
   beforeAll(async () => {
     const NewUser = await UserModel.Create(user)
     user._id = NewUser._id
+    order.user_id = user._id as number
+    const NewOrder = await OrderModel.Create(order)
+    order.id = NewOrder.id
+    const NewProduct = await ProductModel.Create(product)
+    product.id = NewProduct.id
+    Prodcut_Order.Order = order.id
+    Prodcut_Order.Product = product.id
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const New_Product_Order = await Product_Order_Model.Create(Prodcut_Order)
   })
   afterAll(async () => {
     const conn = await DB.connect()
-    const sql = 'DELETE FROM _User'
-    await conn.query(sql)
+    const Del_User = 'DELETE FROM _User'
+    const Del_Order = 'DELETE FROM Product'
+    const Del_Product = 'DELETE FROM orders'
+    const Del_Product_Order = 'DELETE FROM Porduct_Order'
+    await conn.query(Del_User)
+    await conn.query(Del_Order)
+    await conn.query(Del_Product)
+    await conn.query(Del_Product_Order)
     conn.release()
   })
   describe('test Authantiacted Methods', () => {
@@ -47,6 +83,33 @@ describe('Test Endpoints User Routes', () => {
           _password: '123a4asdf',
         })
       expect(res.status).toBe(401)
+    })
+  })
+  describe('Test Advance level opration api where', () => {
+    it('Test GetOrderByUserId Endpoint Should retrun User', async () => {
+      const res = await request
+        .get('/user/GetOrderByUserId')
+        .set('Content-type', 'application/json')
+        .set('Authorization', `${token}`)
+        .send({ id: user._id })
+      const { _name, _status, quantity } = res.body.data
+      expect(res.status).toBe(200)
+      expect(user._name).toBe(_name)
+      expect(order._status).toBe(_status)
+      expect(order.quantity).toBe(quantity)
+    })
+    it('Test GetProductByUserId Endpoint Should retrun Product', async () => {
+      const res = await request
+        .get('/user/GetProductByUserId')
+        .set('Content-type', 'application/json')
+        .set('Authorization', `${token}`)
+        .send({ id: user._id })
+      const { _name, descount, price, category } = res.body.data
+      expect(res.status).toBe(200)
+      expect(product._name).toBe(_name)
+      expect(product.descount).toBe(descount)
+      expect(product.price).toBe(price)
+      expect(product.category).toBe(category)
     })
   })
   describe('Test CRUD opration api', () => {

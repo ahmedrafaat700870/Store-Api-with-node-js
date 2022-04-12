@@ -1,4 +1,5 @@
 import User from '../types/user.type'
+import Product from '../types/Product.type'
 import DB from '../database'
 import bcrypt from 'bcrypt'
 import config from '../config'
@@ -15,7 +16,7 @@ export class UserStore {
         u._first_name,
         u._last_name,
         u._gmail,
-        hashPassword(u._password),
+        hashPassword(u._password as string),
       ]
       const res = await con.query(sql.Create, values)
       con.release()
@@ -34,7 +35,7 @@ export class UserStore {
       throw new Error(`${error}`)
     }
   }
-  async GetOne(id: string): Promise<User> {
+  async GetOne(id: number): Promise<User> {
     try {
       const conn = await DB.connect()
       const RES = await conn.query(sql.GetOne, [id])
@@ -92,6 +93,26 @@ export class UserStore {
       }
       conn.release()
       return null
+    } catch (error) {
+      throw new Error(`${error}`)
+    }
+  }
+  async GetOrderByUserId(User_id: number): Promise<User> {
+    try {
+      const conn = await DB.connect()
+      const res = await conn.query(sql.Where.TowTables, [User_id])
+      conn.release()
+      return res.rows[0]
+    } catch (error) {
+      throw new Error(`${error}`)
+    }
+  }
+  async GetProductByUserId(User_id: number): Promise<Product> {
+    try {
+      const conn = await DB.connect()
+      const res = await conn.query(sql.Where.ThreeTables, [User_id])
+      conn.release()
+      return res.rows[0]
     } catch (error) {
       throw new Error(`${error}`)
     }

@@ -86,13 +86,43 @@ export const authanticate = async (
   next: NextFunction
 ) => {
   try {
-    // eslint-disable-next-line prettier/prettier
-    const user = await UserModel.authanticate(req.body._password, req.body._gmail)
+    const user = await UserModel.authanticate(
+      req.body._password,
+      req.body._gmail
+    )
     const token = Jwt.sign({ user }, config.Tocken_Secret as unknown as string)
     if (!user) {
       return res.status(401).json('faild to login')
     }
     return res.status(200).json({ User: user, token: token })
+  } catch (error) {
+    next(error)
+  }
+}
+export const GetOrderByUserID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const data = await UserModel.GetOrderByUserId(req.body.id)
+    res.status(200).json({
+      data: data,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+export const GetProductByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const data = await UserModel.GetProductByUserId(req.body.id)
+    res.status(200).json({
+      data: data,
+    })
   } catch (error) {
     next(error)
   }

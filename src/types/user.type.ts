@@ -5,6 +5,10 @@ type User = {
   _last_name: string
   _gmail: string
   _password: string
+  id: number
+  user_id: number
+  quantity: number
+  _status: string
 }
 
 export default User

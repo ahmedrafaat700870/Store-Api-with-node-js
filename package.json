@@ -9,7 +9,7 @@
     "formate": "prettier --write ./**/*.ts",
     "dev": "nodemon ./src/index.ts",
     "bulid": "tsc",
-    "test": "set NODE_ENV=test&& tsc && db-migrate up --env test && jasmine && db-migrate reset --env test",
+    "test": "set NODE_ENV=test && tsc && db-migrate up --env test && jasmine && db-migrate reset --env test",
     "up": "db-migrate up",
     "down": "db-migrate down",
     "watch":"tsc-watch --esModuleInterop src/index.ts --outDir ./dist --onSuccess 'node ./dist/index.js'"

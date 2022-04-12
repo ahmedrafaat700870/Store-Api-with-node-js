@@ -3,10 +3,9 @@ import authanticateUser from '../../middleware/authanticate.middleware'
 import { Router } from 'express'
 const ProductRoutes = Router()
 ProductRoutes.get('/getone', controller.GetOne)
-  .get('/GetAll', authanticateUser, controller.GetAll)
+  .get('/GetAll', controller.GetAll)
   .get('/GetOne', authanticateUser, controller.GetOne)
-  .post('/Create', authanticateUser, controller.Create)
+  .post('/Create', controller.Create)
   .delete('/Delete', authanticateUser, controller.DeleteOne)
   .patch('/UpdateOne', authanticateUser, controller.UpdataOne)
-
 export default ProductRoutes

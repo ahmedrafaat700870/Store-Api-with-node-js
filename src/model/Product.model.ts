@@ -5,7 +5,7 @@ class ProductStore {
   async Create(p: Product): Promise<Product> {
     try {
       const conn = await DB.connect()
-      const res = await conn.query(sql.Create, [
+      const res = await conn.query(sql.Create as string, [
         p._name,
         p.descount,
         p.brand,
@@ -21,7 +21,7 @@ class ProductStore {
   async GetOne(id: number): Promise<Product> {
     try {
       const conn = await DB.connect()
-      const res = await conn.query(sql.GetOne, [id])
+      const res = await conn.query(sql.GetOne as string, [id])
       conn.release()
       return res.rows[0]
     } catch (error) {
@@ -31,7 +31,7 @@ class ProductStore {
   async GetAll(): Promise<Product[]> {
     try {
       const conn = await DB.connect()
-      const res = await conn.query(sql.GetAll)
+      const res = await conn.query(sql.GetAll as string)
       conn.release()
       return res.rows
     } catch (error) {
@@ -41,7 +41,7 @@ class ProductStore {
   async DelteOne(id: number): Promise<Product> {
     try {
       const conn = await DB.connect()
-      const res = await conn.query(sql.DeleteOne, [id])
+      const res = await conn.query(sql.DeleteOne as string, [id])
       conn.release()
       return res.rows[0]
     } catch (error) {
@@ -51,7 +51,7 @@ class ProductStore {
   async UpdateOne(p: Product): Promise<Product> {
     try {
       const conn = await DB.connect()
-      const res = await conn.query(sql.UpdateOne, [
+      const res = await conn.query(sql.UpdateOne as string, [
         p._name,
         p.descount,
         p.brand,

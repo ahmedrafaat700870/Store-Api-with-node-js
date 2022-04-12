@@ -7,7 +7,7 @@ import authanticateUser from '../middleware/authanticate.middleware'
 const route = Router()
 route
   .use('/user', User)
-  .use('/Product', ProductRoutes)
+  .use('/Product', authanticateUser, ProductRoutes)
   .use('/Order', authanticateUser, OrderRoutes)
-  .use('/Prodcut_Order', ProductOrderRoutes)
+  .use('/Prodcut_Order', authanticateUser, ProductOrderRoutes)
 export default route
