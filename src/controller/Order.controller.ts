@@ -7,7 +7,7 @@ export const GetOne = async (
   next: NextFunction
 ) => {
   try {
-    const Order = await OrderModel.GetOne(req.body.User_id)
+    const Order = await OrderModel.GetOne(req.params.id as unknown as number)
     res.status(200).json({
       status: 'Success',
       data: Order,

@@ -78,10 +78,9 @@ describe('Test Endpoints Order Routes', () => {
     })
     it('Test GetOne Endpoint Should retrun Product', async () => {
       const res = await request
-        .get('/Order/GetOne')
+        .get(`/Order/GetOne/${user._id}`)
         .set('Content-type', 'application/json')
         .set('Authorization', `${token}`)
-        .send({ User_id: order.user_id })
       const { quantity, _status, user_id, id } = res.body.data
       expect(order.id).toBe(id)
       expect(order.quantity).toBe(quantity)

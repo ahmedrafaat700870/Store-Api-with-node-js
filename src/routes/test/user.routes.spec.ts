@@ -143,10 +143,9 @@ describe('Test Endpoints User Routes', () => {
     })
     it('Test GetOne Endpoint Should retrun User', async () => {
       const res = await request
-        .get('/user/GetOne')
+        .get(`/user/GetOne/${user._id}`)
         .set('Content-type', 'application/json')
         .set('Authorization', `${token}`)
-        .send({ id: user._id })
       const { _name, _first_name, _last_name, _gmail } = res.body.data
       expect(res.status).toBe(200)
       expect(user._first_name).toBe(_first_name)

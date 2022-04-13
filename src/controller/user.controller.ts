@@ -22,7 +22,9 @@ export const GetOne = async (
   next: NextFunction
 ) => {
   try {
-    const User: User = await UserModel.GetOne(req.body.id)
+    const User: User = await UserModel.GetOne(
+      parseInt(req.params.id as unknown as string, 10)
+    )
     res.status(200).json({
       status: 'Success',
       data: User,
@@ -33,7 +35,7 @@ export const GetOne = async (
   }
 }
 export const GetAll = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {

@@ -2,9 +2,8 @@ import * as controller from '../../controller/Product.controller'
 import authanticateUser from '../../middleware/authanticate.middleware'
 import { Router } from 'express'
 const ProductRoutes = Router()
-ProductRoutes.get('/getone', controller.GetOne)
-  .get('/GetAll', controller.GetAll)
-  .get('/GetOne', authanticateUser, controller.GetOne)
+ProductRoutes.get('/GetAll', controller.GetAll)
+  .get('/GetOne/:id', authanticateUser, controller.GetOne)
   .post('/Create', controller.Create)
   .delete('/Delete', authanticateUser, controller.DeleteOne)
   .patch('/UpdateOne', authanticateUser, controller.UpdataOne)

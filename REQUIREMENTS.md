@@ -436,3 +436,7 @@ PRIMARY KEY (Oreder, Product),
 CONSTRAINT CON_Oreder FOREIGN KEY (Oreder) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT CON_Product FOREIGN KEY (Product) REFERENCES Product(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+### JWT
+
+you must but Tocken_Secret in env , Token encrypt by Tocken_Secret when the user login the api give hime this token and when user go to any routes he must given this token . we check from this token by Tocken_Secret if it true then the user authenticated else he not .

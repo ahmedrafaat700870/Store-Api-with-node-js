@@ -2,7 +2,7 @@ import * as controller from '../../controller/user.controller'
 import { Router } from 'express'
 import authanticateUser from '../../middleware/authanticate.middleware'
 const User = Router()
-User.get('/GetOne', authanticateUser, controller.GetOne)
+User.get('/GetOne/:id', authanticateUser, controller.GetOne)
   .get('/GetAll', authanticateUser, controller.GetAll)
   .get('/GetOrderByUserId', authanticateUser, controller.GetOrderByUserID)
   .get('/GetProductByUserId', authanticateUser, controller.GetProductByUserId)

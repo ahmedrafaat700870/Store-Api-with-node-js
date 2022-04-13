@@ -85,10 +85,9 @@ describe('Test Endpoints Product Routes', () => {
     })
     it('Test GetOne Endpoint Should retrun Product', async () => {
       const res = await request
-        .get('/Product/GetOne')
+        .get(`/Product/GetOne/${product.id}`)
         .set('Content-type', 'application/json')
         .set('Authorization', `${token}`)
-        .send({ id: product.id })
       const { id, _name, descount, brand, price, category } = res.body.data
       expect(res.status).toBe(200)
       expect(product.descount).toBe(descount)
