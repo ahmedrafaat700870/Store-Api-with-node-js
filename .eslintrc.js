@@ -20,6 +20,5 @@ module.exports = {
     'prettier/prettier': 2, // Means error
     'no-console': 2, // Means warning
     'no-var': 'error',
-    'prefer-const': 'error',
   },
 }

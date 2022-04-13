@@ -1,10 +1,11 @@
 import * as controller from '../../controller/Product_Order.controller'
+import authanticateUser from '../../middleware/authanticate.middleware'
 import { Router } from 'express'
 const ProductOrderRoutes = Router()
-ProductOrderRoutes.get('/getOne/:id', controller.GetOne)
-  .get('/GetOrders', controller.GetAll)
-  .get('/GetOrder', controller.GetAll)
-  .post('/CreateOrder', controller.CreateOne)
-  .patch('/UpdateOrder', controller.Update)
-  .delete('/DeleteOrder', controller.Delete)
+ProductOrderRoutes.get('/getOne/:id', authanticateUser, controller.GetOne)
+  .get('/GetOrders', authanticateUser, controller.GetAll)
+  .get('/GetOrder', authanticateUser, controller.GetAll)
+  .post('/CreateOrder', authanticateUser, controller.CreateOne)
+  .patch('/UpdateOrder', authanticateUser, controller.Update)
+  .delete('/DeleteOrder', authanticateUser, controller.Delete)
 export default ProductOrderRoutes

@@ -1,10 +1,11 @@
 import * as controlller from '../../controller/Order.controller'
 import { Router } from 'express'
 const OrderRoutes = Router()
-OrderRoutes.get('/GetOne/:id', controlller.GetOne)
-  .get('/GetAll', controlller.GetAll)
-  .post('/create', controlller.CreateOne)
-  .patch('/updateOne', controlller.UpdateOne)
-  .delete('/deleteOne', controlller.DeleteOne)
+import authanticateUser from '../../middleware/authanticate.middleware'
+OrderRoutes.get('/GetOne/:id', authanticateUser, controlller.GetOne)
+  .get('/GetAll', authanticateUser, controlller.GetAll)
+  .post('/create', authanticateUser, controlller.CreateOne)
+  .patch('/updateOne', authanticateUser, controlller.UpdateOne)
+  .delete('/deleteOne', authanticateUser, controlller.DeleteOne)
 
 export default OrderRoutes
